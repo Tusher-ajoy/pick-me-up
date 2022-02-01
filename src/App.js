@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
+import Destination from './components/Destination/Destination';
+import Blog from './components/Blog/Blog';
+import NotFound from './components/NotFound/NotFound';
+import Contact from './components/Contact/Contact';
+import { createContext, useState } from 'react';
+import RequireAuth from './components/RequireAuth/RequireAuth';
+
+export const UserContext = createContext();
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
+        <Route path="destination" element={<RequireAuth> <Destination /> </RequireAuth>} />
+        <Route path="blog" element={<RequireAuth> <Blog /> </RequireAuth>} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

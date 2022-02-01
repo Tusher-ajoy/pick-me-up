@@ -1,0 +1,33 @@
+.cardContainer{
+    padding: 100px  calc((90vw - 1000px) / 2) 0px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-column-gap: 50px;
+}
+.card{
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+.card img{
+    width: 70%;
+}
+.card h6{
+    margin: 0px;
+}
+
+@media screen and (max-width: 768px){
+    .cardContainer{
+        grid-template-columns: auto;
+        grid-row-gap: 50px;
+        padding-top: 0px;
+    }
+    .card{
+        margin: 0px 10px;
+        box-shadow: 10px 10px 8px #888888;
+    }
+}
